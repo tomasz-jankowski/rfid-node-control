@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const MFRC522 = require('mfrc522-rpi');
 const SOFTSPI = require('rpi-softspi');
 
+const User = require('./models/user');
+
 mongoose.connect('mongodb://localhost:27017/rfid', {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -51,6 +53,14 @@ setInterval(() => {
         uid[2].toString(16),
         uid[3].toString(16)
     );
+
+    User.findOne({uid: uid}).exec((err, foundUser) => {
+        if(err)
+            console.log(err);
+        else {
+            console.log("User found: ", foundUser.owner);
+        }
+    });
 
     // Stop
     mfrc522.stopCrypto();
