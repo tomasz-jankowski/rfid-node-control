@@ -52,15 +52,6 @@ setInterval(() => {
         uid[3].toString(16)
     );
 
-    // Default auth key
-    const key = [0xff, 0xff, 0xff, 0xff, 0xff, 0xff];
-
-    // Authenticate on Block 8 with key and UID
-    if(!mfrc522.authenticate(8, key, uid)) {
-        console.log("Authentication error!");
-        return;
-    }
-
     // Stop
     mfrc522.stopCrypto();
 }, 500);
