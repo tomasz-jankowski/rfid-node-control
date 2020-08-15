@@ -14,8 +14,6 @@ mongoose.connect('mongodb://localhost:27017/rfid', {
 .catch(err => console.log(err.message));
 
 app.get('/:uid', (req, res) => {
-    console.log("get request");
-
    User.findOne({ uid: req.params.uid }).exec((err, foundUser) => {
         if(err)
             res.sendStatus(404);

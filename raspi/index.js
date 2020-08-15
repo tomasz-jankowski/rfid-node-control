@@ -40,7 +40,7 @@ setInterval(() => {
     response.data.forEach(u => {
         uid += u.toString(16);
     });
-    url = '192.168.0.34:8080/' + uid.slice(0, 8);
+    url = 'http://192.168.0.34:8080/' + uid.slice(0, 8);
 
     fetch(url)
         .then(res => res.json())
