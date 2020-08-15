@@ -42,10 +42,17 @@ setInterval(() => {
     });
     uid = uid.slice(0, 8);
 
-    Axios.get(`192.168.0.34:8080/${uid}`)
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
-
+    Axios.get('192.168.0.34:8080/', {
+        params: {
+            uid: uid
+        }
+    }).then(function (response) {
+        console.log(response);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+ 
     // Stop
     mfrc522.stopCrypto();
 }, 500);
