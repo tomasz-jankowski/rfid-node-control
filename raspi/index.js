@@ -1,6 +1,11 @@
 const MFRC522 = require('mfrc522-rpi');
 const SOFTSPI = require('rpi-softspi');
 const fetch = require('node-fetch');
+const GPIO = require('onoff').Gpio;
+
+const redLED = new GPIO(16, 'out');
+const yellowLED = new GPIO(20, 'out');
+const greenLED = new GPIO(21, 'out');
 
 console.log("Ready to scan");
 
@@ -44,7 +49,25 @@ setInterval(() => {
 
     fetch(url)
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+            if(data.owner === 'admin') {
+                let blinkInterval = setInterval(() => {
+                    if (greenLED.readSync() === 0) {
+                        greenLED.writeSync(1);
+                    } else {
+                        greenLED.writeSync(0);
+                    }
+                }, 250);
+            } else {
+                let blinkInterval = setInterval(() => {
+                    if (redLED.readSync() === 0) {
+                        redLED.writeSync(1);
+                    } else {
+                        redLED.writeSync(0);
+                    }
+                }, 250);
+            }
+        })
         .catch(err => console.log(err));
  
     // Stop
