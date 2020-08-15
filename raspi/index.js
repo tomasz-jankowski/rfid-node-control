@@ -42,6 +42,13 @@ setInterval(() => {
         uid[3].toString(16)
     );
 
+    let uidRef = '';
+    uid.forEach(u => {
+        uidRef += u.toString(16);
+    });
+
+    console.log(uidRef);
+
     // Stop
     mfrc522.stopCrypto();
 }, 500);
