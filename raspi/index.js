@@ -1,5 +1,6 @@
 const MFRC522 = require('mfrc522-rpi');
 const SOFTSPI = require('rpi-softspi');
+const fetch = require('node-fetch');
 
 console.log("Ready to scan");
 

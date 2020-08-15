@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "axios": "^0.19.2",
-    "mfrc522-rpi": "^2.1.2"
+    "mfrc522-rpi": "^2.1.2",
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {},
   "scripts": {
