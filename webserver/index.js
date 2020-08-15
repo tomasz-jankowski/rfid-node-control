@@ -13,7 +13,7 @@ mongoose.connect('mongodb://localhost:27017/rfid', {
 .then(() => console.log("Connected to DB"))
 .catch(err => console.log(err.message));
 
-app.get('/', (req, res) => {
+app.get('/:uid', (req, res) => {
     console.log("get request");
 
    User.findOne({ uid: req.params.uid }).exec((err, foundUser) => {

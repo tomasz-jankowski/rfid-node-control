@@ -1,6 +1,5 @@
 const MFRC522 = require('mfrc522-rpi');
 const SOFTSPI = require('rpi-softspi');
-const { default: Axios } = require('axios');
 
 console.log("Ready to scan");
 
@@ -40,18 +39,12 @@ setInterval(() => {
     response.data.forEach(u => {
         uid += u.toString(16);
     });
-    uid = uid.slice(0, 8);
+    url = '192.168.0.34:8080/' + uid.slice(0, 8);
 
-    Axios.get('192.168.0.34:8080/', {
-        params: {
-            uid: uid
-        }
-    }).then(function (response) {
-        console.log(response);
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
+    fetch(url)
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err));
  
     // Stop
     mfrc522.stopCrypto();
